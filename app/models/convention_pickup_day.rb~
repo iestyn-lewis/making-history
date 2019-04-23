@@ -1,0 +1,2 @@
+class ConventionPickupDay < ActiveRecord::Base
+end

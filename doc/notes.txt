@@ -1,0 +1,103 @@
+Each week for 90 days from start of convention, record pickup for each day of convention
+Record actual pickup
+Get percentage of peak for convention
+
+Data Entry (no immediate need for data importing)
+Data retrieval - query by group, year, city
+
+
+cities
+    has_many :hotels
+    has_many :conventions
+
+hotel_chains
+    has_many :hotels
+    columns :name
+
+hotels
+    belongs_to :hotel_chain
+    belongs_to :city
+    has_many :convention_blocks
+
+convention_groups
+    has_many :conventions
+
+conventions
+    belongs_to :city
+    belongs_to :convention_group
+    has_many :convention_blocks
+    has_many :convention_block_pickups
+    has_many :convention_days
+    columns :name
+
+convention_days
+    belongs_to :convention
+    has_many :convention_block_days
+    columns :date, :day_number, :day_of_week, :is_peak, (totals)
+
+convention_block
+    belongs_to :hotel
+    belongs_to :convention
+    
+convention_block_days
+    belongs_to :convention_block
+    belongs_to :convention_day
+    has_many :convention_block_day_pickups
+    columns :number_of_rooms, :actual, :is_peak
+
+convention_block_day_pickups
+    belongs_to :convention_block_day
+    belongs_to :convention_block_pickup
+    columns :pickup
+
+convention_block_pickups
+    belongs_to :convention_block
+    has_many :convention_block_day_pickups
+    columns :date_measured, :days_before_convention,
+:weeks_before_convention, :total, :is_actual, :comments, :is_cutoff
+(what is this?)
+
+
+
+Next meeting:
+Set up domain and hosting
+What are the questions that need to be answered?
+Why are the blocks often padded with days with 0 allocated?
+
+Notes:
+overall, not bad.  But too complex, especially at first glance.
+Lock down data in the past!
+
+
+Time:
+1 hr - data modeling, initial conversations
+1 hr - admin site setup, tweaking data model
+
+Sunday:
+1 hour - incorporating changes, started data entry screen
+Monday:
+1 hour - data entry screen
+
+Tuesday:
+1.5 hour - setting up Goldberg
+
+Wednesday
+1 hour - reports, more Goldberg
+
+Sunday
+1 hour - report screen
+
+Wednesday
+0.5 hour - data model, creating entities
+
+Thursday
+1.5 hour - search screen, permissions
+
+Tuesday
+1 hour - permissions, bugfixing, mongrel
+
+
+
+
+
+Add Current Block field to Convention Block table - each day has a current block, rename block to Original Block.

@@ -1,0 +1,19 @@
+class Convention < ActiveRecord::Base
+  after_create :create_days
+
+  belongs_to :city
+  belongs_to :convention_group
+  has_many :convention_blocks
+  has_many :convention_block_pickups
+  has_many :convention_days
+  
+  def create_days
+    # this will create the necessary days for data entry for this convention
+    count = 1
+    self.open_on.upto(self.close_on) do |thedate|
+      day = self.convention_days.new(:date => thedate, :day_number => count, :convention_id => self.id)
+      day.save
+      count += 1
+    end
+  end
+end

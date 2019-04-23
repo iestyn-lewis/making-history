@@ -1,0 +1,44 @@
+<h2><%= @convention.name %></h2>
+<h3><%= @convention_block.hotel.name %></h2>
+<% form_tag('/data_entry/update') do %>
+  <%= hidden_field_tag('id', params[:id]) %>
+  <table borderwidth= 1>
+    <tr colspan = <%= @block_days.count %>>
+    </tr>
+    <tr>
+      <th>&nbsp;</th>
+      <% @block_days.each do |block_day| %>
+        <th><%= block_day.convention_day.date %></th>
+      <% end %>
+    </tr>
+    <tr>
+      <td>Block</td>
+      <% @block_days.each do |block_day| %>
+        <td><%= text_field_tag('block_' + block_day.id.to_s, block_day.number_of_rooms) %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>Actuals</td>
+      <% @block_days.each do |block_day| %>
+        <td><%= text_field_tag('actual_' + block_day.id.to_s, block_day.actual) %></td>
+      <% end %>                                                                                                
+    </tr>
+  
+    <tr colspan = <%= @block_days.count %>>
+      <th>
+        Pickups
+      </th>
+    </tr>
+    <% @pickups.each do |pickup| %>
+      <tr>
+        <td>
+          <%= pickup.weeks_before %>
+        </td>
+        <% pickup.convention_block_pickup_days.each do |pickup_day| %>
+          <td><%= text_field_tag('pickup_' + pickup_day.id.to_s, pickup_day.pickup) %></td>
+        <% end %>
+      </tr>
+    <% end %>  
+  </table>
+  <%= submit_tag ("Update") %>
+<% end %>

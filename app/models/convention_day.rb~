@@ -1,0 +1,8 @@
+class ConventionDay < ActiveRecord::Base
+  belongs_to :convention
+  has_many :convention_block_days
+  
+  def to_label
+    self.date.to_s
+  end
+end

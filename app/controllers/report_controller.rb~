@@ -1,0 +1,10 @@
+class ReportController < ApplicationController
+	
+	def show
+		#@weekdays = %w[Sun Mon Tue Wed Thu Fri Sat]
+		@convention = Convention.find(params[:id])
+		@days = @convention.convention_days
+		@blocks = @convention.convention_blocks
+	end
+end
+

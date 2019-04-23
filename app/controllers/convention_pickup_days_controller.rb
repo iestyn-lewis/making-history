@@ -1,0 +1,2 @@
+class ConventionPickupDaysController < ApplicationController
+end

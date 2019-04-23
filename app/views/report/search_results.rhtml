@@ -1,0 +1,17 @@
+<h2>Search Results</h2>
+<table border-width=1 border=1>
+	<tr>
+		<th>Name</th>
+		<th>Group</th>
+		<th>City</th>
+		<th>Dates</th>
+	</tr>
+	<% @conventions.each do |convention| %>
+		<tr>
+			<td><a target = "_top" href="/report/show/<%= convention.id %>"><%= convention.name %></a></td>
+			<td><%= convention.convention_group.name %></td>
+			<td><%= convention.city.name %></td>
+			<td><%= convention.open_on.strftime("%m/%d/%Y") + " - " + convention.close_on.strftime("%m/%d/%Y") %></td>
+		</tr>
+	<% end %>
+</table>

@@ -1,0 +1,2 @@
+class ConventionPickup < ActiveRecord::Base
+end

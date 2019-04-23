@@ -1,0 +1,14 @@
+<h2>Search for a convention:</h2>
+
+<% form_tag '/report/search_results' do %>
+	Group:
+	<%= select_tag ("convention_group", options_from_collection_for_select(@convention_groups, "id", "name")) %>
+	<p/>
+	&nbsp;&nbsp;&nbsp;&nbsp;City:
+	<%= select_tag ("city", options_from_collection_for_select(@cities, "id", "city_state")) %>
+	<p/>
+	&nbsp;&nbsp;&nbsp;Year:
+	<%= select_tag ("year", options_for_select(1970..2007)) %>
+	<p/>
+	<%= submit_tag 'Search' %>
+<% end %>

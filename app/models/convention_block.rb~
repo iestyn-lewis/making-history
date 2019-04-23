@@ -1,0 +1,34 @@
+class ConventionBlock < ActiveRecord::Base
+  after_create :create_child_objects
+  
+  belongs_to :hotel
+  belongs_to :convention
+  has_many :convention_block_days
+  has_many :convention_block_pickups
+
+  def to_label
+    self.hotel.name
+  end
+  
+  # create child objects
+  def create_child_objects
+    create_block_days
+    create_block_pickups
+  end
+  
+  # create the block days after we have been created
+  def create_block_days
+    self.convention.convention_days.each do |convention_day|
+      block_day = self.convention_block_days.new(:convention_day_id => convention_day.id, :convention_block_id => self.id)
+      block_day.save
+    end
+  end
+  
+  # create the block pickups after we have been created
+  def create_block_pickups
+    1.upto(12) do |week|
+      pickup = self.convention_block_pickups.new(:convention_block_id => self.id, :weeks_before => week)
+      pickup.save
+    end
+  end
+end

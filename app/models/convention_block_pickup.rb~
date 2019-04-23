@@ -1,0 +1,17 @@
+class ConventionBlockPickup < ActiveRecord::Base
+  after_create :create_day_pickups
+  
+  belongs_to :convention_block
+  has_many :convention_block_pickup_days
+  
+  def create_day_pickups
+    self.convention_block.convention_block_days.each do |day|
+      pickup_day = self.convention_block_pickup_days.new(:convention_block_day_id => day.id, :convention_block_pickup_id => self.id)
+      pickup_day.save
+    end
+  end
+  
+  def to_label
+    weeks_before
+  end
+end

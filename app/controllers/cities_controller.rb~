@@ -1,0 +1,5 @@
+class CitiesController < ApplicationController
+  active_scaffold :city do |config|
+    config.columns = [:name, :state]
+  end
+end

@@ -1,0 +1,15 @@
+<h2><%= @convention.name %></h2>
+  <table borderwidth= 1>
+    <tr>
+      <th>&nbsp;</th>
+      <% @days.each do |day| %>
+        <th><%= day.date %></th>
+      <% end %>
+    </tr>
+		<tr>
+			<td>Block</td>
+		</tr>
+		<tr>
+			</td>Actual</td>
+		</tr>
+  </table>

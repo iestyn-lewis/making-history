@@ -1,0 +1,9 @@
+class BrowseByGroupController < ApplicationController
+  active_scaffold :convention_group do |config|
+    config.columns = [:name]
+    config.actions.exclude :show, :update, :create, :delete
+		config.action_links.add 'index', :label => 'Conventions', 
+																		:type => :record, 
+																		:parameters => {:controller => 'browse_by_convention'}
+  end
+end

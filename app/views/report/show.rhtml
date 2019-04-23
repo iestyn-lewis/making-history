@@ -1,0 +1,55 @@
+<h2><%= @convention.convention_group.name + " - " + @convention.name %></h2>
+<h3><%= @convention.open_on.strftime("%m/%d/%Y") + " - " + @convention.close_on.strftime("%m/%d/%Y") %></h3>
+  <table borderwidth= 1 width=100% border=1>
+    <tr>
+      <th colspan = 2>&nbsp;</th>
+      <% @days.each do |day| %>
+				<th><%= day.date.strftime("%a") %></th>
+      <% end %>
+    </tr>
+		<tr>
+			<th colspan = 2>&nbsp;</th>
+			<% @days.each do |day| %>
+        <th><%= day.date.strftime("%m/%d") %></th>
+			<% end %>
+		</tr>
+		<tr>
+			<td valign=top rowspan=2>Totals</td>
+			<td>Block</td>
+			<% @days.each do |day| %>
+				<td><%= day.total_block %></td>
+			<% end %>
+		</tr>
+		<tr>
+			<td>Actual</td>
+			<% @days.each do |day| %>
+				<td><%= day.total_actual %></td>
+			<% end %>
+		</tr>
+		<% first = true 
+			@blocks.each do |block| %>
+			<tr>
+				<% if first %>
+					<td valign=top rowspan = <%= @blocks.count%>>Blocks</td>	
+				<% first = false 
+					 end %>
+				<td><%= block.hotel.name %></td>
+				<% block.convention_block_days.each do |block_day| %>
+					<td><%= block_day.number_of_rooms %></td>
+				<% end %>
+			</tr>
+		<% end %>
+		<% first = true 
+			@blocks.each do |block| %>
+			<tr>
+				<% if first %>
+					<td valign=top rowspan = <%= @blocks.count%>>Actuals</td>	
+				<% first = false 
+					 end %>
+				<td><%= block.hotel.name %></td>
+				<% block.convention_block_days.each do |block_day| %>
+					<td><%= block_day.actual %></td>
+				<% end %>
+			</tr>
+		<% end %>
+  </table>

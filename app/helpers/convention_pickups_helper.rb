@@ -1,0 +1,2 @@
+module ConventionPickupsHelper
+end

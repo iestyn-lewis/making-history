@@ -1,0 +1,2 @@
+class ConventionPickupsController < ApplicationController
+end
